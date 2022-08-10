@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 jobs:
   test-job:
-    timeout-minutes: 1
+    timeout-minutes: 3
     runs-on: ubuntu-latest
     steps:
       - run: echo "${{secrets.PRIVATE_KEY}}" >> private_key
