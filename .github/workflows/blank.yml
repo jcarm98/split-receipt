@@ -12,7 +12,7 @@ jobs:
       - run: chmod 400 private_key
       - run: eval `ssh-agent -s` && ssh-add private_key 
     # - run: scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i private_key newfile.txt root@${{secrets.SERVER_IP}}:~/newfile.txt
-      - run: ssh -o StrictHostKeyChecking=no -i private_key root@${{secrets.SERVER_IP}} "rm -rf ~/repo && exec ssh-agent bash && ls && ssh-add -v ~/keyname && git clone git@github.com:jcarm98/splitreceipt.git ~/repo && ls"
+      - run: ssh -o StrictHostKeyChecking=no -i private_key root@${{secrets.SERVER_IP}} "rm -rf ~/repo && exec ssh-agent bash; ssh-add -v ~/keyname; git clone git@github.com:jcarm98/splitreceipt.git ~/repo && ls"
       - run: ssh -o StrictHostKeyChecking=no -i private_key root@${{secrets.SERVER_IP}} "ls && cd ~/repo && yarn install && yarn build"
       - run: ssh -o StrictHostKeyChecking=no -i private_key root@${{secrets.SERVER_IP}} "rm -rf /var/www/test && cp ~/repo/build /var/www/test"
       - run: ssh -o StrictHostKeyChecking=no -i private_key root@${{secrets.SERVER_IP}} "rm -rf /etc/nginx/sites-enabled/active && cp ~/repo/nginx-config /etc/nginx/sites-enabled/active && systemctl restart nginx"
