@@ -24,7 +24,7 @@ server {
 }
 
 server {
-	if($host = www.staging.splitreceipt.app){
+	if ($host = www.staging.splitreceipt.app){
 		return 301 https://$host$request_uri;
 	}
 	listen 80 ;
