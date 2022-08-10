@@ -1,0 +1,18 @@
+name: Test
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+jobs:
+  test-job:
+    timeout-minutes: 1
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "${{secrets.PRIVATE_KEY}}" >> private_key
+      - run: chmod 400 private_key
+      - run: eval `ssh-agent -s` && ssh-add private_key
+      - run: echo "this is a newly created file!" >> newfile.txt 
+      - run: scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i private_key newfile.txt root@${{secrets.SERVER_IP}}:~/newfile.txt
+      - run: ssh -o StrictHostKeyChecking=no -i private_key root@${{secrets.SERVER_IP}} "echo 'working' > testtesttest.txt"
+      - run: eval `ssh-agent -s` && ssh-add -D
+      - run: rm private_key
