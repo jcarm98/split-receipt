@@ -1,0 +1,173 @@
+/*
+    16px = 1em
+    1px = 1/16 em
+    0.0625em = 1px
+*/
+
+@import 'fonts.css';
+
+textarea,
+input.text,
+input[type="text"],
+input[type="button"],
+input[type="submit"],
+.input-checkbox {
+    -webkit-appearance: none;
+    border-radius: 0;
+}
+
+body {
+    font-size: 1rem;
+    font-family: 'Century Gothic' !important;
+    /*
+    font: 1rem "Century Gothic", Futura, sans-serif;
+    */
+    color: #FFFFFF;
+    background-color: #042802;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    background-color: #042802;
+}
+
+#nameCollection, #itemCollection, #establishRelation, #calculateTax {
+    text-align: center;
+    width: 18.75rem;
+    background-color: #0c6307;
+    border-radius: 1.875rem;
+    padding: 1rem;
+    margin: 1rem;
+}
+
+header {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.tip {
+    display: inline-block;
+    font-weight: bold;
+    margin-bottom: 0.875rem;
+}
+
+button, input {
+    font: 1rem "Century Gothic", Futura, sans-serif;
+}
+
+.nameInput, .itemInput, .priceInput {
+    height: 3rem;
+    width: 13.75rem;
+    padding: 0.5rem;
+    border-width: 0;
+}
+
+.itemInput {
+    width: 9.625rem;
+}
+
+.priceInput {
+    text-align: right;
+    height: 2.875rem;
+    width: 3rem;
+    border-color: #000000;
+    border-style: solid;
+    border-width: 0.0625rem;
+}
+
+.next, .back, .all, .none, .confirm, .plus, .minus {
+    height: 4rem;
+    width: 4rem;
+    background-color: #F7F7F7;
+    border-color: #000000;
+    border-style: solid;
+    border-width: 0.0625rem;
+}
+
+.plus, .minus {
+    float: right;
+    font-size: 2rem;
+}
+
+.minus {
+    margin-top: -1.375rem;
+}
+
+.nameRow, .itemRow, .selectableItemRowButton, .selectableNameRow, .sharedRow, .nameSubRow, .finalRow, .itemSubRow{
+    word-wrap: break-word;
+    text-align: left;
+    background-color: #128e0b;
+    height: 0.875rem;
+    padding: 1.375rem 0 1.75rem 0.5rem;
+    color: #FFFFFF;
+    border-color: #FFFFFF;
+    border-style: solid;
+    border-width: 0.0625rem 0 0.0625rem 0;
+}
+
+.selectableNameRow {
+    background-color: #41c23b;
+    padding: 0.8125rem 0 1.1875rem 0.5rem;
+}
+
+.nameSubRow {
+    background: linear-gradient( to right, #0c4608, transparent);
+    padding: 0.0rem 0 0.5rem 1.5rem;
+}
+
+.finalRow {
+    background-color: #41c23b;
+    padding: 0.5rem 0 1rem 0.5rem;
+}
+
+.itemSubRow {
+    background: linear-gradient( to right, #128e0b, transparent);
+    padding: 0.0rem 0 0.5rem 1.5rem;
+}
+
+.all, .none {
+    width: 50%;
+}
+
+.confirm {
+    width: 100%;
+}
+
+.price, .amount, .totalAmount, .partialAmount {
+    float: right;
+    margin-right: 0.5rem;
+}
+
+.totalAmount {
+    margin-right: 4rem;
+}
+
+#itemList, #nameList {
+    vertical-align: top;
+}
+
+#nameListTip {
+    height: 2.5rem;
+}
+
+#itemListTip {
+    height: 1.875rem;
+    margin-top: 0.625rem;
+}
+
+.tax {
+    text-align: right;
+    height: 1rem;
+    width: 4rem;
+    padding: 0.5rem;
+    border-width: 0;
+}
+
+/*
+input[type=checkbox] {
+    transform: scale(1.5);
+}
+*/
