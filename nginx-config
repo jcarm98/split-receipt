@@ -1,34 +1,34 @@
 server {
 	root /var/www/test;
 	index index.html;
-	server_name www.test.splitreceipt.app;
+	server_name www.staging.splitreceipt.app;
 	location / {
 		try_files $uri $uri/ =404;
 	}
 	listen [::]:443 ssl;
 	listen 443 ssl;
-	ssl_certificate /etc/letsencrypt/live/test.splitreceipt.app/fullchain.pem;
-	ssl_certificate_key /etc/letsencrypt/live/test.splitreceipt.app/privkey.pem;
+	ssl_certificate /etc/letsencrypt/live/staging.splitreceipt.app/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/staging.splitreceipt.app/privkey.pem;
 	include /etc/letsencrypt/options-ssl-nginx.conf;
 	ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 }
 
 server {
-	if ($host = test.splitreceipt.app){
+	if ($host = staging.splitreceipt.app){
 		return 301 https://$host$request_uri;
 	}
 	listen 80 default_server;
 	listen [::]:80 default_server;
-	server_name test.splitreceipt.app;
+	server_name staging.splitreceipt.app;
 	return 404;
 }
 
 server {
-	if ($host = www.test.splitreceipt.app){
+	if ($host = www.staging.splitreceipt.app){
 		return 301 https://$host$request_uri;
 	}
 	listen 80 ;
 	listen [::]:80 ;
-	server_name www.test.splitreceipt.app;
+	server_name www.staging.splitreceipt.app;
 	return 404;
 }
