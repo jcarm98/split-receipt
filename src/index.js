@@ -21,7 +21,7 @@ class NameCollection extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            header: "Welcome Dustin",
+            header: "Split Receipt",
             name: "",
         };
     }
