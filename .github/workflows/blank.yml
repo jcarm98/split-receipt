@@ -15,6 +15,6 @@ jobs:
       - run: ssh -o StrictHostKeyChecking=no -i private_key deploy@${{secrets.SERVER_IP}} "rm -rf ~/repo && . ~/runner_helper"
       - run: ssh -o StrictHostKeyChecking=no -i private_key deploy@${{secrets.SERVER_IP}} "cd ~/repo && export PATH=/home/deploy/.nvm/versions/node/v14.17.5/bin:$PATH && yarn install && yarn build"
       - run: ssh -o StrictHostKeyChecking=no -i private_key deploy@${{secrets.SERVER_IP}} "rm -rf /var/www/test && cp -r ~/repo/build /var/www/test"
-      - run: ssh -o StrictHostKeyChecking=no -i private_key deploy@${{secrets.SERVER_IP}} "rm -rf /etc/nginx/sites-enabled/active && cp ~/repo/nginx-config /etc/nginx/sites-enabled/active && systemctl restart nginx"
+      - run: ssh -o StrictHostKeyChecking=no -i private_key deploy@${{secrets.SERVER_IP}} "rm -rf /etc/nginx/sites-enabled/active && cp ~/repo/nginx-config /etc/nginx/sites-enabled/active && /usr/sbin/service nginx restart"
       - run: eval `ssh-agent -s` && ssh-add -D
       - run: rm private_key
