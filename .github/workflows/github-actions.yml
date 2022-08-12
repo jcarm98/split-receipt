@@ -1,7 +1,9 @@
 name: Test
 on:
- # push:
+  push:
  #   branches: ["main"]
+    tags:
+     - "*"
   workflow_dispatch:
 jobs:
   test-job:
