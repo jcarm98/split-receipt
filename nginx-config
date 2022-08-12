@@ -1,7 +1,7 @@
 server {
 	root /var/www/test;
 	index index.html;
-	server_name www.staging.splitreceipt.app;
+	server_name staging.splitreceipt.app www.staging.splitreceipt.app;
 	location / {
 		try_files $uri $uri/ =404;
 	}
