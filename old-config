@@ -1,0 +1,21 @@
+server {
+	listen 443 ssl;
+	server_name splitreceipt.app www.splitreceipt.app;
+	
+	root /var/www/split;
+
+	index index.html;
+
+	location / {
+		try_files $uri $uri/ =404;
+	}
+
+	ssl_certificate /root/split/splitReceiptApp.crt;
+	ssl_certificate_key /root/split/splitReceiptApp.key;
+}
+
+server {
+       listen 0.0.0.0:80;
+       server_name splitreceipt.app www.splitreceipt.app;
+       rewrite ^ https://$host$request_uri? permanent;
+}

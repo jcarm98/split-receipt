@@ -1,5 +1,11 @@
+SplitReceipt
+
 https://splitreceipt.app
 
-yarn start
+Currently deploys to staging.splitreceipt.app
 
-yarn build
+Install node v14.17.5, yarn
+
+Build: yarn build
+
+Local Environment: yarn start

@@ -4,17 +4,20 @@
     0.0625em = 1px
 */
 
+
+
 body {
     font: 1rem "Century Gothic", Futura, sans-serif;
     color: #FFFFFF;
-    background-color: #042802;
+    /*background-color: #042802;*/
+    background-color: #9a9a9a;
     margin: 0;
 }
 
 .container {
     display: flex;
     justify-content: center;
-    background-color: #042802;
+    /*background-color: #042802;*/
 }
 
 #nameCollection, #itemCollection, #establishRelation, #calculateTax {
@@ -153,8 +156,10 @@ button, input {
     border-width: 0;
 }
 
+
 /*
 input[type=checkbox] {
     transform: scale(1.5);
 }
 */
+
