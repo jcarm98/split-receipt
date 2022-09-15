@@ -230,13 +230,11 @@ function toDollars(value) {
     if (typeof value === "string") {
         value.trim();
     }
-    if (modifiedPrice.length < 5) {
-        if (modifiedPrice.indexOf('.') === -1)
-            modifiedPrice += ".00";
-    }
+    if (modifiedPrice.indexOf('.') === -1)
+        modifiedPrice += ".00";
     if (modifiedPrice.indexOf('.') === modifiedPrice.length - 2)
         modifiedPrice += "0";
-    while (typeof modifiedPrice === "string" && modifiedPrice.match(".[0-9]{2}[0-9]+$"))
+    while (typeof modifiedPrice === "string" && modifiedPrice.match("[.][0-9]{2}[0-9]+$"))
         modifiedPrice = modifiedPrice.substring(0, modifiedPrice.length - 1);
     console.log("to: ", modifiedPrice);
     return modifiedPrice;
@@ -378,7 +376,7 @@ function ItemMapModal(props) {
         <div>
             <div class="overlay"></div>
             <div ref={props.modalRef} class="l-main-panel l-split-modal">
-                <div class="l-input-button modal-exit removeable clickable-overlay" tabIndex="0" onClick={props.close}>
+                <div class="l-input-button modal-exit removeable clickable-overlay" tabIndex="0" onClick={props.close} onKeyDown={onEnter(props.close)}>
                     &#x00D7;
                 </div>
                 <h3 style={{ color: "black" }}>Pick who pays</h3>
@@ -877,7 +875,8 @@ class Router extends React.Component {
             "--offset": -0.66,
             "--direction": -1,
             "--x-scale": 0.75,
-            "--x-offset": -10
+            "--x-offset": -10,
+            "z-index": "-4"
         };
         const left1 = {
             "--abs-offset": 0.33,
@@ -893,7 +892,8 @@ class Router extends React.Component {
             "--direction": 1,
             "--x-scale": 0.75,
             "--x-offset": 10,
-            "left": "-50%"
+            "left": "-50%",
+            "z-index": "-4"
         };
         let styles = [{ ...base }, { ...base }, { ...base }, { ...base }];
         if (this.state.stage === NAMECOLLECTION) {
@@ -905,7 +905,8 @@ class Router extends React.Component {
                 "--offset": -1,
                 "--direction": -1,
                 "--x-scale": 0.875,
-                "--x-offset": -10
+                "--x-offset": -10,
+                "z-index": "-5"
             }; 
         }
         else if (this.state.stage === ITEMCOLLECTION) {
@@ -927,7 +928,8 @@ class Router extends React.Component {
                 "--direction": 1,
                 "--x-scale": 0.875,
                 "--x-offset": 10,
-                "left": "-50%"
+                "left": "-50%",
+                "z-index": "-5"
             };
             styles[1] = {...left2}
             styles[2] = {...left1}
@@ -939,44 +941,46 @@ class Router extends React.Component {
                     <h1 className="margin-center" id="header-test">Split Receipt</h1>
                 </header>
                 <main>
-                    <div class="carousel">
-                        <CollectNames
-                            list={this.state.names}
-                            create={this.create(NAMES)}
-                            update={this.update(NAMES)}
-                            delete={this.delete(NAMES)}
-                            clear={this.clear(NAMES)}
-                            next={() => this.setStage(ITEMCOLLECTION)}
-                            styleObject={styles[0]}
-                        />
-                        <CollectItems
-                            list={this.state.items}
-                            create={this.create(ITEMS)}
-                            update={this.update(ITEMS)}
-                            delete={this.delete(ITEMS)}
-                            clear={this.clear(ITEMS)}
-                            next={() => this.setStage(ITEMMAPPING)}
-                            back={() => this.setStage(NAMECOLLECTION)}
-                            styleObject={styles[1]}
-                        />
-                        <ItemMapping
-                            list={this.state.mappedItems}
-                            names={this.state.names}
-                            items={this.state.items}
-                            create={this.create(MAPPEDITEMS)}
-                            update={this.update(MAPPEDITEMS)}
-                            delete={this.delete(MAPPEDITEMS)}
-                            clear={this.clear(MAPPEDITEMS)}
-                            next={() => this.setStage(RESULTS)}
-                            back={() => this.setStage(ITEMCOLLECTION)}
-                            styleObject={styles[2]}
-                        />
-                        <Results
-                            names={this.state.names}
-                            items={this.state.mappedItems}
-                            back={() => this.setStage(ITEMMAPPING)}
-                            styleObject={styles[3]}
-                        />
+                    <div className="carousel-wrapper">
+                        <div class="carousel">
+                            <CollectNames
+                                list={this.state.names}
+                                create={this.create(NAMES)}
+                                update={this.update(NAMES)}
+                                delete={this.delete(NAMES)}
+                                clear={this.clear(NAMES)}
+                                next={() => this.setStage(ITEMCOLLECTION)}
+                                styleObject={styles[0]}
+                            />
+                            <CollectItems
+                                list={this.state.items}
+                                create={this.create(ITEMS)}
+                                update={this.update(ITEMS)}
+                                delete={this.delete(ITEMS)}
+                                clear={this.clear(ITEMS)}
+                                next={() => this.setStage(ITEMMAPPING)}
+                                back={() => this.setStage(NAMECOLLECTION)}
+                                styleObject={styles[1]}
+                            />
+                            <ItemMapping
+                                list={this.state.mappedItems}
+                                names={this.state.names}
+                                items={this.state.items}
+                                create={this.create(MAPPEDITEMS)}
+                                update={this.update(MAPPEDITEMS)}
+                                delete={this.delete(MAPPEDITEMS)}
+                                clear={this.clear(MAPPEDITEMS)}
+                                next={() => this.setStage(RESULTS)}
+                                back={() => this.setStage(ITEMCOLLECTION)}
+                                styleObject={styles[2]}
+                            />
+                            <Results
+                                names={this.state.names}
+                                items={this.state.mappedItems}
+                                back={() => this.setStage(ITEMMAPPING)}
+                                styleObject={styles[3]}
+                            />
+                        </div>
                     </div>
                 </main>
                 <footer>
@@ -997,12 +1001,11 @@ ReactDOM.render(
 
 /*
 todo:
-    1. finalize wording in panels, footer with link to portfolio
-    2. stage changes require conditions, if not met then toast
-    3. upload to git, push to staging, move website to new server
-    4. test and update infra deployment instructions
+    1. name, item, price character limits?
+    2. upload to git, push to staging, move website to new server
+    3. test and update infra deployment instructions
         should be able to move everything to a new virtual machine: main, staging, v1
-    5. clean up, split, and document css
-    6. clean up, split, and document js
+    4. clean up, split, and document css
+    5. clean up, split, and document js
 
 */
