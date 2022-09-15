@@ -1,7 +1,7 @@
 server {
 	root /var/www/staging;
 	index index.html;
-	server_name www.staging.splitreceipt.app;
+	server_name staging.splitreceipt.app www.staging.splitreceipt.app;
 	location / {
 		try_files $uri $uri/ =404;
 	}
@@ -17,8 +17,8 @@ server {
 	if ($host = staging.splitreceipt.app){
 		return 301 https://$host$request_uri;
 	}
-	listen 80 default_server;
-	listen [::]:80 default_server;
+	listen 80 ;
+	listen [::]:80 ;
 	server_name staging.splitreceipt.app;
 	return 404;
 }
