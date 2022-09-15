@@ -1,0 +1,34 @@
+server {
+	root /var/www/live;
+	index index.html;
+	server_name splitreceipt.app www.splitreceipt.app;
+	location / {
+		try_files $uri $uri/ =404;
+	}
+	listen [::]:443 ssl;
+	listen 443 ssl;
+	ssl_certificate /etc/letsencrypt/live/splitreceipt.app/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/splitreceipt.app/privkey.pem;
+	include /etc/letsencrypt/options-ssl-nginx.conf;
+	ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+}
+
+server {
+	if ($host = splitreceipt.app){
+		return 301 https://$host$request_uri;
+	}
+	listen 80 default_server;
+	listen [::]:80 default_server;
+	server_name splitreceipt.app;
+	return 404;
+}
+
+server {
+	if ($host = www.splitreceipt.app){
+		return 301 https://$host$request_uri;
+	}
+	listen 80 ;
+	listen [::]:80 ;
+	server_name www.splitreceipt.app;
+	return 404;
+}
