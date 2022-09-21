@@ -185,7 +185,8 @@ class Router extends React.Component {
             document.getElementById("stage-1-focus").focus();
         }
         else if (stage === ITEMCOLLECTION) {
-            setTimeout(()=>{document.getElementById("stage-2-focus").focus();}, 1000);
+            /* Without the delay, misaligns the panel on Android Chrome 105 */
+            setTimeout(()=>{document.getElementById("stage-2-focus").focus();}, 400);
         }
         else if (stage === ITEMMAPPING) {
             document.getElementById("stage-3-focus").focus();
