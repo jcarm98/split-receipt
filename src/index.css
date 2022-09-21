@@ -4,6 +4,10 @@
     0.0625em = 1px
 */
 
+html, body {
+    height: 100%;
+}
+
 body {
     font: 1rem "Century Gothic", Futura, sans-serif;
     color: #FFFFFF;
