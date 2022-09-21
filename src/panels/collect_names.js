@@ -8,15 +8,15 @@ import { capitalize, onEnter } from '../utils/utils.js';
  */
 function NameInputRow(props) {
     return (
-        <div class="l-row l-short-bottom">
+        <div className="l-row l-short-bottom">
             <input
                 type="text"
-                class="l-name"
+                className="l-name"
                 onChange={(e) => props.onChange(e.target.value)}
                 value={props.name}
                 tabIndex={props.ti}
             />
-            <div class="l-input-button removeable clickable-overlay"
+            <div className="l-input-button removeable clickable-overlay"
                 onClick={props.onClick}
                 onKeyDown={onEnter(props.onClick)}
                 tabIndex={props.ti}

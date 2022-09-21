@@ -14,17 +14,17 @@ import { onEnter } from '../utils/utils.js';
 function ItemMappingRow(props) {
     let pricePiece = props.isConfigured
         ? (<div>
-            <div class="l-item text-input-style l-price-input clickable-overlay">{props.item.price}</div>
+            <div className="l-item text-input-style l-price-input clickable-overlay">{props.item.price}</div>
             <div
-                class="l-input-button removeable clickable-overlay"
-                onClick={(e) => { props.onClick(e); }}
-                onKeyDown={onEnter(() => props.onClick(undefined))}
+                className="l-input-button removeable clickable-overlay"
+                onClick={props.onClick}
+                onKeyDown={onEnter(props.onClick)}
                 tabIndex={props.ti}
             >
                 &#x00D7;
             </div>
         </div>)
-        : (<div class="l-item l-padding-no-button text-input-style l-price-input clickable-overlay">{props.item.price}</div>);
+        : (<div className="l-item l-padding-no-button text-input-style l-price-input clickable-overlay">{props.item.price}</div>);
     let names = props.isConfigured
         ? props.list.find(m => m.id === props.item.id).names.map((n, index) => (
             <div className="l-attached-item l-padding-no-button l-name text-input-style" key={index} >
@@ -39,13 +39,13 @@ function ItemMappingRow(props) {
     return (
         <div className="rows">
             <div
-                class="l-row l-short-bottom border-match"
+                className="l-row l-short-bottom border-match"
                 id={parseInt(props.index) === 0 ? "stage-3-focus" : ""}
                 onClick={props.mapPeople}
                 onKeyDown={onEnter(props.mapPeople)}
                 tabIndex={props.ti}
             >
-                <div class="l-item l-padding-no-button text-input-style clickable-overlay">{props.item.item}</div>
+                <div className="l-item l-padding-no-button text-input-style clickable-overlay">{props.item.item}</div>
                 {pricePiece}
             </div>
             {names && names.length > 0 ? namesContainer : ""}
@@ -101,12 +101,13 @@ function ItemMapModal(props) {
     let names = props.names.map((n, index) => {
         selected.push(props.item.names.includes(n));
         return (
-            <div class="l-row" key={index} onClick={(e) => props.togglePerson(e, n)}>
+            <div className="l-row" key={index} onClick={(e) => props.togglePerson(e, n)}>
                 <div id={"border-" + index}
-                    class={"l-name l-padding-no-button text-input-style clickable-overlay " + (selected[index] ? "is-selected" : "")}
+                    className={"l-name l-padding-no-button text-input-style clickable-overlay " + (selected[index] ? "is-selected" : "")}
                     onClick={onClick(n, index)}
                     tabIndex="0"
                     onKeyDown={onEnter((e) => onClick(n, index)(e))}
+                    style={{display: "inline-flex"}}
                 >
                     <input id={"check-" + index} type="checkbox" defaultChecked={selected[index]} tabIndex="-1" />
                     {n}
@@ -116,10 +117,10 @@ function ItemMapModal(props) {
     });
     return (
         <div>
-            <div class="overlay"></div>
-            <div ref={props.modalRef} class="l-main-panel l-split-modal">
+            <div className="overlay"></div>
+            <div ref={props.modalRef} className="l-main-panel l-split-modal">
                 <div
-                    class="l-input-button modal-exit removeable clickable-overlay"
+                    className="l-input-button modal-exit removeable clickable-overlay"
                     tabIndex="0"
                     onClick={props.close}
                     onKeyDown={onEnter(props.close)}
@@ -128,17 +129,17 @@ function ItemMapModal(props) {
                 </div>
                 <h3>Pick who pays</h3>
 
-                <div class="l-row l-top-gap">
-                    <div class="l-item l-padding-no-button text-input-style">{props.item.item}</div>
-                    <div class="l-item l-padding-no-button text-input-style l-price-input">{props.item.price}</div>
+                <div className="l-row l-top-gap">
+                    <div className="l-item l-padding-no-button text-input-style">{props.item.item}</div>
+                    <div className="l-item l-padding-no-button text-input-style l-price-input">{props.item.price}</div>
                 </div>
                 {names}
-                <div class="l-row l-top-gap">
-                    <button class="button l-space-right" onClick={checkAll}>All</button>
-                    <button class="button l-space-left" onClick={uncheckAll}>None</button>
+                <div className="l-row l-top-gap">
+                    <button className="button l-space-right" onClick={checkAll}>All</button>
+                    <button className="button l-space-left" onClick={uncheckAll}>None</button>
                 </div>
-                <div class="l-row">
-                    <button class="button" onClick={props.close}>Next</button>
+                <div className="l-row">
+                    <button className="button" onClick={props.close}>Next</button>
                 </div>
             </div>
         </div>
@@ -168,7 +169,11 @@ export class ItemMapping extends React.Component {
             this.openModal(outerIndex);
         }
         this.deleteMappedItem = (item) => {
-            return () => {
+            return (e) => {
+                if (e) {
+                    e.stopPropagation();
+                    e.preventDefault();
+                }
                 let outerIndex = -1;
                 this.props.list.forEach((el, index) => {
                     if (el.id === item.id) {

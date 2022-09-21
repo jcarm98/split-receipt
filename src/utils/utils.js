@@ -14,7 +14,7 @@ export function debounce(func, timeout = 1000) {
 export function onEnter(enterFunc) {
     return (e) => {
         if (e.key === "Enter")
-            enterFunc();
+            enterFunc(e);
     }
 }
 

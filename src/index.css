@@ -122,6 +122,8 @@ main {
 /* Lets divs look like text input */
 .text-input-style {
     text-align: left;
+    word-wrap: initial;
+    overflow: hidden;
 }
 
 /*
@@ -182,9 +184,8 @@ input[type='text'], .text-input-style {
 
 input[type='checkbox'] {
     position: relative;
-    top: -50%;
 
-    transform: translate(0, 80%);
+    transform: none;
 
     margin-right: calc(2px + 10 * ((100vw - 91px)/(1509)));
 
@@ -205,19 +206,19 @@ input[type='checkbox'] {
 
 @media(min-width: 288px) and (max-width: 505px) {
     input[type='checkbox'] {
-        transform: translate(0, 80%) scale(1.25);
+        transform: scale(1.25);
     }
 }
 
 @media(min-width: 506px) and (max-width: 954px) {
     input[type='checkbox'] {
-        transform: translate(0, 80%) scale(1.5);
+        transform: scale(1.5);
     }
 }
 
 @media(min-width: 955px) {
     input[type='checkbox'] {
-        transform: translate(0, 80%) scale(2);
+        transform: scale(2);
     }
 }
 

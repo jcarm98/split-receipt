@@ -10,10 +10,10 @@ import { capitalize, onEnter, toDollars, uuidv4} from '../utils/utils.js';
  */
 function ItemInputRow(props) {
     return (
-        <div class="l-row l-short-bottom">
+        <div className="l-row l-short-bottom">
             <input
                 type="text"
-                class="l-item l-padding-no-button"
+                className="l-item l-padding-no-button"
                 onChange={(e) => props.itemOnChange(e.target.value)}
                 value={props.item}
                 tabIndex={props.ti}
@@ -21,13 +21,13 @@ function ItemInputRow(props) {
             <input
                 type="text"
                 placeholder="$___.__"
-                class="l-item l-price-input"
+                className="l-item l-price-input"
                 onChange={(e) => props.priceOnChange(e.target.value)}
                 value={props.price}
                 tabIndex={props.ti}
             />
             <div
-                class="l-input-button removeable clickable-overlay"
+                className="l-input-button removeable clickable-overlay"
                 onClick={props.onClick}
                 onKeyDown={onEnter(props.onClick)}
                 tabIndex={props.ti}

@@ -2,7 +2,9 @@ SplitReceipt
 
 https://splitreceipt.app
 
-Currently deploys to staging.splitreceipt.app
+Created with create-react-app
+
+Currently deploys to staging.splitreceipt.app, splitreceipt.app, v1.splitreceipt.app
 
 Install node v14.17.5, yarn
 
