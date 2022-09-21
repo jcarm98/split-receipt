@@ -227,7 +227,7 @@ export class ItemMapping extends React.Component {
             />,
             document.getElementById('modalSlot')
         );
-        setTimeout(() => { document.getElementById("border-0").focus() }, 200);
+        setTimeout(() => { if (document.getElementById("border-0")) document.getElementById("border-0").focus() }, 200);
     }
 
     /* Used for determining tabindex, when panel is inactive, disable tabbing on those elements */
