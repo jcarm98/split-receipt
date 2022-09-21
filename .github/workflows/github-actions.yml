@@ -2,8 +2,8 @@ name: Deploy Staging
 on:
   push:
  #   branches: ["main"]
-    tags:
-     - "*"
+ #   tags:
+ #    - "*"
   workflow_dispatch:
 jobs:
   test-job:
