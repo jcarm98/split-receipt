@@ -1,6 +1,6 @@
 name: Deploy V1
 on:
-  push:
+ # push:
  #   branches: ["main"]
  #   tags:
  #    - "*"
