@@ -185,7 +185,7 @@ class Router extends React.Component {
             document.getElementById("stage-1-focus").focus();
         }
         else if (stage === ITEMCOLLECTION) {
-            document.getElementById("stage-2-focus").focus();
+            setTimeout(()=>{document.getElementById("stage-2-focus").focus();}, 1000);
         }
         else if (stage === ITEMMAPPING) {
             document.getElementById("stage-3-focus").focus();
