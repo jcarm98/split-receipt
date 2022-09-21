@@ -1,0 +1,94 @@
+/*
+    Right:
+        4px at and under 300px width
+        27px at 600px width
+        scales with width between 300px and 600px
+        203px at 1600px width
+        scales with width between 600px and 1600px
+        scales upward without limit
+*/
+#toast-container {
+    position: absolute;
+    top: 0%;
+    right: calc(27px + 176 * ((100vw - 600px)/1000));
+
+    flex-direction: column;
+    align-items: flex-end;
+
+    display: flex;
+}
+
+@media(max-width: 300px) {
+    #toast-container {
+        right: 4px;
+    }
+}
+
+@media(min-width: 300px) and (max-width: 600px) {
+    #toast-container {
+        right: calc(4px + 23 * ((100vw - 300px)/300));
+    }
+}
+
+@media(min-width: 1600px) {
+    #toast-container {
+        right: calc(203px + 480 * ((100vw - 1600px)/960));
+    }
+}
+
+/* similar to l-footer-panel... */
+.glass-panel {
+    z-index: 1;
+    padding: 0.5rem;
+    
+    display: inline-block;
+
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+    border: 1px solid rgba(100, 255, 100, 0.25);
+    border-radius: 1rem;
+    box-sizing: border-box;
+    max-width: 20vw;
+
+    background-color: rgba(100, 223, 100, 0.15);
+
+    text-align: center;
+    word-wrap: break-word;
+
+    backdrop-filter: blur(2px);
+}
+
+@media(max-width: 300px) {
+    .glass-panel {
+        max-width: 50vw;
+    }
+}
+
+@media(min-width: 300px) and (max-width: 600px) {
+    .glass-panel {
+        max-width: 33vw;
+    }
+}
+
+@media(min-width: 600px) and (max-width: 950px) {
+    .glass-panel {
+        max-width: 25vw;
+    }
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.glass-panel {
+    opacity: 1;
+    animation-timing-function: linear;
+    animation-delay: 5s;
+    animation-duration: 5s;
+    animation-name: fade-out;
+}
