@@ -363,6 +363,7 @@ class Router extends React.Component {
                 <footer>
                     <div className="l-footer-wrapper">
                         <a className="l-footer-panel" href="https://mrcarmona.com">My Portfolio</a>
+                        <a className="l-footer-panel" href="https://v1.splitreceipt.app">v1</a>
                     </div>
                 </footer>
                 <div id="modalSlot"></div>
