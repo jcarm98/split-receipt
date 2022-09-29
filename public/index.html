@@ -35,6 +35,7 @@
     -->
       <style type="text/css">
         @font-face {
+          font-display: swap;
           font-family: 'Century Gothic';
           src: url('/fonts/CenturyGothic.eot');
           src: local('Century Gothic'), local('CenturyGothic'),
@@ -45,11 +46,25 @@
           font-weight: normal;
           font-style: normal;
         }
+        
+        
+        @font-face {
+          font-display: swap;
+          font-family: 'Century Gothic';
+          src: url('/fonts/CenturyGothic-Bold.eot');
+          src: local('Century Gothic Bold'), local('CenturyGothic-Bold'),
+              url('/fonts/CenturyGothic-Bold.eot?#iefix') format('embedded-opentype'),
+              url('/fonts/CenturyGothic-Bold.woff2') format('woff2'),
+              url('/fonts/CenturyGothic-Bold.woff') format('woff'),
+              url('/fonts/CenturyGothic-Bold.ttf') format('truetype');
+          font-weight: bold;
+          font-style: normal;
+        }
       </style>
       <!--<link rel="stylesheet" href="%PUBLIC_URL%/fonts.css">-->
     <title>Split Receipt</title>
   </head>
-  <body style="font-display: swap;">
+  <body>
       <noscript>You need to enable JavaScript to run this app.</noscript>
       <div id="root"></div>
       
