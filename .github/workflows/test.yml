@@ -1,0 +1,23 @@
+name: Test
+on:
+ # push:
+ #   branches: ["main"]
+ #   tags:
+ #    - "*"
+  workflow_dispatch:
+jobs:
+  test-job:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "${{secrets.PRIVATE_KEY}}" >> private_key
+      - run: chmod 400 private_key
+    # - run: eval `ssh-agent -s` && ssh-add private_key 
+    # - run: scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i private_key newfile.txt root@${{secrets.SERVER_IP}}:~/newfile.txt
+      - run: ssh -o StrictHostKeyChecking=no -i private_key deploy@${{secrets.SERVER_IP}} "echo $RANDOM | md5sum | head -v 20; echo;"
+    #  - run: ssh -o StrictHostKeyChecking=no -i private_key deploy@${{secrets.SERVER_IP}} "rm -rf ~/repo && . ~/runner_helper"
+    #  - run: ssh -o StrictHostKeyChecking=no -i private_key deploy@${{secrets.SERVER_IP}} "cd ~/repo && export PATH=/home/deploy/.nvm/versions/node/v14.17.5/bin:$PATH && yarn install && yarn build"
+    #  - run: ssh -o StrictHostKeyChecking=no -i private_key deploy@${{secrets.SERVER_IP}} "rm -rf /var/www/staging && cp -r ~/repo/build /var/www/staging"
+    #  - run: ssh -o StrictHostKeyChecking=no -i private_key deploy@${{secrets.SERVER_IP}} "rm -rf /etc/nginx/sites-enabled/staging && cp ~/repo/staging-config /etc/nginx/sites-enabled/staging && sudo /usr/sbin/service nginx restart"
+      - run: eval `ssh-agent -s` && ssh-add -D
+      - run: rm private_key
