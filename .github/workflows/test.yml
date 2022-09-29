@@ -17,7 +17,7 @@ jobs:
       - run: echo $RANDOM | md5sum | head -c 20 > name.txt
       - run: cat name.txt;
       - run: cat name.txt;
-      - run: echo "echo \"stuff here!\"" | ssh -o StrictHostKeyChecking=no -i private_key deploy@${{secrets.SERVER_IP}}
+      - run: echo "mkdir stuffhere" | ssh -o StrictHostKeyChecking=no -i private_key deploy@${{secrets.SERVER_IP}}
     #  - run: ssh -o StrictHostKeyChecking=no -i private_key deploy@${{secrets.SERVER_IP}} "rm -rf ~/repo && . ~/runner_helper"
     #  - run: ssh -o StrictHostKeyChecking=no -i private_key deploy@${{secrets.SERVER_IP}} "cd ~/repo && export PATH=/home/deploy/.nvm/versions/node/v14.17.5/bin:$PATH && yarn install && yarn build"
     #  - run: ssh -o StrictHostKeyChecking=no -i private_key deploy@${{secrets.SERVER_IP}} "rm -rf /var/www/staging && cp -r ~/repo/build /var/www/staging"
