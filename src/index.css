@@ -24,6 +24,10 @@
 
 /* Base Rules */
 
+html{
+    font-display: swap;
+}
+
 /* Allow use of full height */
 html, body {
     height: 100%;
