@@ -14,10 +14,9 @@ jobs:
       - run: chmod 400 private_key
     # - run: eval `ssh-agent -s` && ssh-add private_key 
     # - run: scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i private_key newfile.txt root@${{secrets.SERVER_IP}}:~/newfile.txt
-      - run: TEST=$(echo $RANDOM | md5sum | head -c 20)
-      - run: echo $TEST;
-      - run: echo $TEST;
-      - run: ssh -o StrictHostKeyChecking=no -i private_key deploy@${{secrets.SERVER_IP}} "echo $TEST"
+      - run: echo $RANDOM | md5sum | head -c 20 > name.txt
+      - run: cat name.txt;
+      - run: ssh -o StrictHostKeyChecking=no -i private_key deploy@${{secrets.SERVER_IP}} "echo 'S{name}'"
     #  - run: ssh -o StrictHostKeyChecking=no -i private_key deploy@${{secrets.SERVER_IP}} "rm -rf ~/repo && . ~/runner_helper"
     #  - run: ssh -o StrictHostKeyChecking=no -i private_key deploy@${{secrets.SERVER_IP}} "cd ~/repo && export PATH=/home/deploy/.nvm/versions/node/v14.17.5/bin:$PATH && yarn install && yarn build"
     #  - run: ssh -o StrictHostKeyChecking=no -i private_key deploy@${{secrets.SERVER_IP}} "rm -rf /var/www/staging && cp -r ~/repo/build /var/www/staging"
