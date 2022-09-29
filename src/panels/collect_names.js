@@ -32,6 +32,18 @@ function NameInputRow(props) {
     splitting the receipt
 */
 export class CollectNames extends React.Component {
+    /**
+        All props are stored in parent's state or computed from parent's base functions.
+        list: The list this panel acts upon with create, update, delete, and clear.
+        create: Specialized function that adds new entries to the list, takes a validation function and callback function
+        update: Specialized function that updates a specific entry in the list, takes a validation function and callback function
+        delete: Specialized function that removes a specific entry in the list, takes a callback function
+        clear: Specialized function that empties the list, takes a callback function
+        next: Switches the active panel to the next state/panel using the parent's stage variable stored within its state
+        styleObject: Necessary for the carousel blur effect; When present is used to calculate its rotation and perspective, as well as disable
+            any tab-able elements and inputs.
+     * @param {{list: [], create: Function, update: Function, delete: Function, clear: Function, next: Function, styleObject: object?}} props
+     */
     constructor(props) {
         super(props);
         this.input = React.createRef();

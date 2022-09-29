@@ -19,8 +19,8 @@ function ResultRow(props) {
         </div>
     ));
     return (
-        <div className="rows">
-            <div className="l-row l-top-gap l-short-bottom">
+        <div>
+            <div className="l-row l-short-bottom">
                 <div className="l-name text-input-style l-padding-no-button l-result-row">
                     <div>{props.person.name}</div>
                     <div>${props.person.amount}</div>
@@ -36,6 +36,15 @@ function ResultRow(props) {
     to set the tax and tip.
 */
 export class Results extends React.Component {
+    /**
+        All props are stored in parent's state or computed from parent's base functions.
+        names: List of names used to compile the final results
+        items: List of items used to compile the final results
+        back: Switches the active panel to the previous state/panel using the parent's stage variable stored within its state
+        styleObject: Necessary for the carousel blur effect; When present is used to calculate its rotation and perspective, as well as disable
+            any tab-able elements and inputs.
+     * @param {{names: [], items: [], back: Function, styleObject: object?}} props
+     */
     constructor(props) {
         super(props);
         this.state = {

@@ -23,7 +23,11 @@ export function toast(message) {
     newToast.innerHTML = message;
     let id = uuidv4();
     toastStack.push({ node: newToast, id: id });
-    container.appendChild(newToast);
+    container.insertBefore(newToast, container.firstChild);
+    // Limit number of modals to 10, they are animated and more starts causing performance issues
+    if (container.children.length > 10) {
+        toastStack[0].node.click();
+    }
     function removeElement() {
         let struct = toastStack.find(s => s.id === id);
         struct.node.remove();

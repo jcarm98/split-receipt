@@ -146,6 +146,12 @@ class Router extends React.Component {
         }
     }
 
+    /* eslint-disable */
+    restart(e) {
+        confirm("Are you sure to want to start over?", () => { window.location.href = window.location.href;});
+    }
+    /* eslint-enable */
+
     /*
         Change the current active stage/panel.
         Validation on stage changes, notifies user with toast.
@@ -315,7 +321,7 @@ class Router extends React.Component {
         return (
             <div className="l-align-footer">
                 <header>
-                    <h1 className="transform-center" id="header-test">Split Receipt</h1>
+                    <h1 className="transform-center" id="header-test" onClick={this.restart}>Split Receipt</h1>
                 </header>
                 <main>
                     <div className="carousel-wrapper">

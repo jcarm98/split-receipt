@@ -27,12 +27,14 @@
 /* Allow use of full height */
 html, body {
     height: 100%;
+    min-height: 100%;
 }
 
 /*
     font-size:
-        0.75em at and under 5.6875em (91px) view width
+        0.75em at 5.6875em (91px) view width
         1.5em at and over 100em (1600px) view width
+        scales with width between 91px and 1600px and below 91px
 */
 body {
     --text-color-1-light: #FFFFFF;
@@ -48,7 +50,12 @@ body {
     This is the inset box shadow that is not scrollable, to match the non-scrolling background
     Shadow size scales with viewport width
 */
-
+    /*
+        box-shadow:
+            0 at and under 91px
+            50px at and over 1600px
+            scales with width between 91px and 1600px
+    */
     body::before {
         content: "";
         width: 100%;
@@ -76,11 +83,16 @@ h1, h2, h3 {
     font-weight: normal;
 }
 
+/*
+    font-size:
+        1rem at 5.6875rem (91px) view width
+        5rem at and over 100em (1600px) view width
+        scales with width between 91px and 1600px and below 91px
+*/
 h1 {
     display: inline-block;
 
     box-sizing: border-box;
-    width: 100%;
     
     font-size: calc(1rem + 4 * ((100vw - 5.6875rem) / 94.3125));
     text-align: center;
@@ -90,6 +102,40 @@ h1 {
 @media (min-width: 100em) {
     h1 {
         font-size: 5rem;
+    }
+}
+
+/*
+    padding-right/padding-left:
+        2rem at and below 6.125rem (98px) view width
+        0 at and above 11.875 (190px) view width
+        scales with width between 98px and 190px
+*/
+header > h1 {
+    transition: 0.3s;
+
+    border-radius: 1rem;
+    padding-right: calc(2 * ((100vw - 6.125rem)/5.75));
+    padding-left: calc(2 * ((100vw - 6.125rem)/5.75));
+
+    cursor: pointer;
+}
+
+header > h1:hover {
+    text-shadow: 0px 0px 10px white;
+}
+
+@media(min-width: 190px) {
+    header > h1 {
+        padding-right: 2rem;
+        padding-left: 2rem;
+    }
+}
+
+@media(max-width: 98px) {
+    header > h1 {
+        padding-right: 0;
+        padding-left: 0;
     }
 }
 
@@ -113,9 +159,18 @@ a {
 }
 
 header {
+    position: absolute;
+    left: 50%;
+
+    transform: translate(-50%, 0);
+
+    width: 100%;
 }
 
 main {
+    flex-grow: 1;
+
+    display: flex;
 }
 
 /* Text Input */
@@ -320,9 +375,12 @@ input[type='checkbox'] {
     Flex column for header main footer
 */
 .l-align-footer {
-    height: 100%;
-    display: flex;
+    position: relative;
     flex-direction: column;
+
+    display: flex;
+
+    min-height: 100%;
 }
 
 /*
@@ -334,7 +392,7 @@ input[type='checkbox'] {
         scales with view width between 500px and 1600px
 */
 footer {
-    position: relative;
+    position: absolute;
     bottom: 0;
     left: 50%;
     flex-direction: column;
@@ -344,7 +402,11 @@ footer {
     display: flex;
     transform: translate(-50%, 0%);
 
+    transition-duration: 0.3s;
+    transition-timing-function: cubic-bezier(0,.79,0,1);
+
     width: calc(485px + 715 * ((100vw - 500px)/1100));
+    padding-bottom: 1rem;
 }
 
 @media (max-width: 500px) {
@@ -355,7 +417,6 @@ footer {
 
 @media (min-width: 1600px) {
     footer {
-        margin-bottom: 1rem;
         width: 1200px;
     }
 }
@@ -380,8 +441,11 @@ footer {
     
     display: inline-block;
 
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(100, 255, 100, 0.25);
+    transition: 0.3s;
+
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+    border-top: 1px solid rgba(100, 255, 100, 0.5);
+    border-left: 1px solid rgba(100, 255, 100, 0.5);
     border-radius: 1rem;
     box-sizing: border-box;
     max-width: 20vw;
@@ -408,6 +472,30 @@ footer {
         margin-left: 0;
         flex-direction: column;
     }
+}
+
+.l-footer-panel:hover {
+    box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.75);
+}
+
+.l-footer-panel::before {
+    content: '';
+
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+
+    display: inline-block;
+    
+    border-radius: 1rem;
+    width: 100%;
+    height: 100%;
+    
+    background-image: linear-gradient(45deg, transparent 0%, rgba(255,255,255, .07) 66%, transparent 66%);
+    
+    pointer-events: none;
+
 }
 
 /*
@@ -442,8 +530,9 @@ footer {
     transition-timing-function: cubic-bezier(0,.79,0,1);
 
     margin: 1rem 0 1rem 0;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-left: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 1rem;
     box-sizing: border-box;
     width: calc(485px + 715 * ((100vw - 500px)/1100));
@@ -487,6 +576,25 @@ footer {
 /* Smaller spacing adustment to above rule */
 .l-main-panel > .l-short-bottom {
     margin-bottom: 0.5em;
+}
+
+.l-main-panel::before {
+    content: '';
+
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+
+    display: inline-block;
+    
+    border-radius: 1rem;
+    width: 100%;
+    height: 100%;
+    
+    background-image: linear-gradient(45deg, transparent 0%, rgba(255,255,255, .07) 66%, transparent 66%);
+    
+    pointer-events: none;
 }
 
 /*
@@ -735,7 +843,10 @@ input[type='text'].l-result-input {
 .l-result-row {
     justify-content: space-between;
 
-    display: flex;    
+    display: flex;
+
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
 }
 
 
@@ -828,6 +939,7 @@ input[type='text'].l-result-input {
     
     border-color: rgb(0, 255, 166, 0.75);
     border-width: 2px;
+    border-style: solid;
     
     backdrop-filter: blur(5px);
 }
@@ -883,10 +995,44 @@ input[type='text'].l-result-input {
 /* Carousel styles */
 
 /* Don't stretch screen if other panels don't fit */
-.carousel-wrapper {
-    width: 100vw;
+/*
+    The top and bottom padding are manually calibrated to account for the space left behind from making the header and footer both position: absolute.
+    This was done to allow the blurred background panels to be viewable when taller than the active panel, but comes at the cost of decoupling the header and footer
+    from the rest of the page layout.
 
+    padding-top:
+        206.2px at and over 1600px view width
+        63.433 at 91px view width
+        scales with width between 91px and 1600px, scales below 91px
+
+    padding-bottom:
+        63px at and over 1600px view width
+        51px at 289px view width
+        72px at 288px view width
+        86px at 91 px view width
+        scales with width between 289px and 1600px
+        scales with width up to 288px and below 91px
+*/
+.carousel-wrapper {
     overflow-x: hidden;
+    overflow-y: clip;
+
+    width: 100%;
+    padding-top: calc(63.4333px + 142.7667 * ((100vw - 91px)/1509));
+    padding-bottom: calc(51px + 12 * ((100vw - 289px)/1311));
+}
+
+@media(max-width: 288px) {
+    .carousel-wrapper {
+        padding-bottom: calc(86px - 14 * ((100vw - 91px)/197));
+    }
+}
+
+@media(min-width: 1600px) {
+    .carousel-wrapper {
+        padding-top: 206.2px;
+        padding-bottom: 63px;
+    }
 }
 
 /* Render all panels, centered and offset */
