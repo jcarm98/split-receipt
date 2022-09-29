@@ -1,7 +1,7 @@
 server {
 	gzip		on;
 	gunzip		on;
-	gzip_types	text/plain text/css text/javascript;
+	gzip_types	text/plain text/css text/javascript application/javascript;
 	gzip_proxied	no-cache no-store private expired auth;
 	root /var/www/live;
 	index index.html;
