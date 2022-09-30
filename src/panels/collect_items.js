@@ -99,11 +99,19 @@ export class CollectItems extends React.Component {
                 toast("Your item is missing a price");
             return false;
         }
+        if(itemStruct.item.trim().length > 32){
+            toast("Item name cannot exceed 32 characters");
+            return false;
+        }
         if (itemStruct.price.match("^[$]?[0-9]+[.][0-9]{2}$") === null) {
             if (itemStruct.price.trim().length === 0 || itemStruct.price.trim() === ".00")
                 toast("Your item is missing a price");
             else
                 toast("Price is missing or in invalid format");
+            return false;
+        }
+        if (itemStruct.price.trim().length > 10){
+            toast("Price cannot exceed 10 characters");
             return false;
         }
         return true;
