@@ -65,6 +65,7 @@ export class CollectNames extends React.Component {
                         toast("Name cannot exceed 36 characters")
                         return false;
                     }
+                    return true;
                 },
                 () => {
                     this.input.current.value = "";
