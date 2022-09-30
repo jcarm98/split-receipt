@@ -83,7 +83,13 @@ export class CollectNames extends React.Component {
         const names = this.props.list.map((item, index) => (
             <NameInputRow
                 name={item}
-                onChange={(value) => this.props.update(index, () => capitalize(value))}
+                onChange={(value) => this.props.update(index, () => capitalize(value), (value) => {
+                    if(value.length > 36){
+                        toast("Name cannot exceed 36 characters")
+                        return false;
+                    }
+                    return true;
+                })}
                 onClick={() => this.props.delete(index)}
                 key={index}
                 ti={this.disable()}
