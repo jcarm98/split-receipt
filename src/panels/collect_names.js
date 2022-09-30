@@ -91,7 +91,8 @@ export class CollectNames extends React.Component {
                         onKeyDown={onEnter(this.addItem)}
                         onClick={this.addItem}
                         tabIndex={this.disable()}
-                        aria-label="Add name"
+                        aria-label="add"
+                        aria-description="Add name to list"
                     >+</div>
                 </div>
                 {names}
