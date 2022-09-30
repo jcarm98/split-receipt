@@ -99,8 +99,8 @@ export class CollectItems extends React.Component {
                 toast("Your item is missing a price");
             return false;
         }
-        if(itemStruct.item.trim().length > 32){
-            toast("Item name cannot exceed 32 characters");
+        if(itemStruct.item.trim().length > 30){
+            toast("Item name cannot exceed 30 characters");
             return false;
         }
         if (itemStruct.price.match("^[$]?[0-9]+[.][0-9]{2}$") === null) {
@@ -151,7 +151,7 @@ export class CollectItems extends React.Component {
             />
         ));
         return (
-            <div id={this.props.styleObject ? "collect-items" : ""} className="l-main-panel" style={this.props.styleObject ? this.props.styleObject : {}}>
+            <div id={this.props.styleObject ? "collect-items" : "" } className="l-main-panel" style={this.props.styleObject ? this.props.styleObject : {}}>
                 <label for="stage-2-focus"><h2>Add your items</h2></label>
                 {/*
                     defaultValue is used because value will prevent writing inside of the input field....
