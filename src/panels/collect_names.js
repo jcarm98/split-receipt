@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { toast } from '../utils/toast.js';
 import { capitalize, onEnter } from '../utils/utils.js';
 
 /** NameInputRow: Creates an editable name row with props: onChange, onClick, name, ti
@@ -54,7 +55,17 @@ export class CollectNames extends React.Component {
         /* Names are capitalized before being stored, cannot be empty */
         this.addItem = () => {
             this.props.create(() => capitalize(this.input.current.value),
-                (value) => value.length !== 0,
+                (value) => {
+                    if(value.length === 0){
+                        toast("Name cannot be empty");
+                        return false;
+                    }
+                    /* 36 character limit for names */
+                    if(value.length > 36){
+                        toast("Name cannot exceed 36 characters")
+                        return false;
+                    }
+                },
                 () => {
                     this.input.current.value = "";
                     this.input.current.focus();
