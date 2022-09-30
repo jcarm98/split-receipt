@@ -18,6 +18,8 @@ function ItemInputRow(props) {
                 onChange={(e) => props.itemOnChange(e.target.value)}
                 value={props.item}
                 tabIndex={props.ti}
+                aria-label="added item name"
+                aria-description="Editable item name in list"
             />
             <input
                 type="text"
@@ -26,12 +28,16 @@ function ItemInputRow(props) {
                 onChange={(e) => props.priceOnChange(e.target.value)}
                 value={props.price}
                 tabIndex={props.ti}
+                aria-label="added item price"
+                aria-description="Editable item price in list"
             />
             <div
                 className="l-input-button removeable clickable-overlay"
                 onClick={props.onClick}
                 onKeyDown={onEnter(props.onClick)}
                 tabIndex={props.ti}
+                aria-label="remove item"
+                aria-description="Remove item from list"
             >
                 &#x00D7;
             </div>
@@ -138,7 +144,7 @@ export class CollectItems extends React.Component {
         ));
         return (
             <div id={this.props.styleObject ? "collect-items" : ""} className="l-main-panel" style={this.props.styleObject ? this.props.styleObject : {}}>
-                <h2>Add your items</h2>
+                <label for="stage-2-focus"><h2>Add your items</h2></label>
                 {/*
                     defaultValue is used because value will prevent writing inside of the input field....
                 */}
@@ -160,12 +166,16 @@ export class CollectItems extends React.Component {
                         value={this.state.price}
                         onKeyDown={onEnter(this.addItem)}
                         tabIndex={this.disable()}
+                        aria-label="item price input"
+                        aria-description="Price for item to be added"
                     />
                     <div
                         className="l-input-button add clickable-overlay"
                         onKeyDown={onEnter(this.addItem)}
                         onClick={this.addItem}
                         tabIndex={this.disable()}
+                        aria-label="add item"
+                        aria-description="Add item to list"
                     >+</div>
                 </div>
                 {items}
