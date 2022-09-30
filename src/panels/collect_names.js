@@ -15,11 +15,15 @@ function NameInputRow(props) {
                 onChange={(e) => props.onChange(e.target.value)}
                 value={props.name}
                 tabIndex={props.ti}
+                aria-label="added name"
+                aria-description="Editable name in list"
             />
             <div className="l-input-button removeable clickable-overlay"
                 onClick={props.onClick}
                 onKeyDown={onEnter(props.onClick)}
                 tabIndex={props.ti}
+                aria-label="remove name"
+                aria-description="Remove name from list"
             >
                 &#x00D7;
             </div>
