@@ -85,7 +85,7 @@ export class CollectNames extends React.Component {
                         ref={this.input}
                         onKeyDown={onEnter(this.addItem)}
                         tabIndex={this.disable()}
-                    />
+                    /><label>
                     <div
                         className="l-input-button add clickable-overlay"
                         onKeyDown={onEnter(this.addItem)}
@@ -93,7 +93,7 @@ export class CollectNames extends React.Component {
                         tabIndex={this.disable()}
                         aria-label="add"
                         aria-description="Add name to list"
-                    >+</div>
+                    >+</div></label>
                 </div>
                 {names}
                 <div className="l-row l-top-gap l-short-bottom">
