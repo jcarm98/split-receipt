@@ -128,7 +128,7 @@ export class Results extends React.Component {
             <div id={this.props.styleObject ? "results" : ""} className="l-main-panel" style={this.props.styleObject ? this.props.styleObject : {}}>
                 <div className="top-gap l-result-input-row">
                     <div className="l-result-input-wrapper">
-                        Tax:&nbsp;
+                        <label for="stage-4-focus">Tax:</label>&nbsp;
                         <input
                             id="stage-4-focus"
                             type="text"
@@ -141,8 +141,9 @@ export class Results extends React.Component {
                         &nbsp;% = {`$${toDollars(subtotal * (this.state.tax / 100))}`}
                     </div>
                     <div className="l-result-input-wrapper">
-                        Tip:&nbsp;$&nbsp;
+                        <label for="tip-input">Tip:</label>&nbsp;$&nbsp;
                         <input
+                            id="tip-input"
                             type="text"
                             placeholder="$5.00"
                             className="l-result-input l-padding-no-button"
