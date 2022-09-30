@@ -75,7 +75,7 @@ export class CollectNames extends React.Component {
         ));
         return (
             <div id={this.props.styleObject ? "collect-names" : ""} className="l-main-panel" style={this.props.styleObject ? this.props.styleObject : {}}>
-                <h2>Add everyone paying</h2>
+                <label for="stage-1-focus"><h2>Add everyone paying</h2></label>
                 <div className="l-row l-top-gap">
                     <input
                         id="stage-1-focus"
@@ -85,7 +85,7 @@ export class CollectNames extends React.Component {
                         ref={this.input}
                         onKeyDown={onEnter(this.addItem)}
                         tabIndex={this.disable()}
-                    /><label>
+                    />
                     <div
                         className="l-input-button add clickable-overlay"
                         onKeyDown={onEnter(this.addItem)}
@@ -93,7 +93,7 @@ export class CollectNames extends React.Component {
                         tabIndex={this.disable()}
                         aria-label="add"
                         aria-description="Add name to list"
-                    >+</div></label>
+                    >+</div>
                 </div>
                 {names}
                 <div className="l-row l-top-gap l-short-bottom">
