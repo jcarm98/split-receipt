@@ -61,8 +61,8 @@ export class CollectNames extends React.Component {
                         return false;
                     }
                     /* 36 character limit for names */
-                    if(value.length > 36){
-                        toast("Name cannot exceed 36 characters")
+                    if(value.length > 34){
+                        toast("Name cannot exceed 34 characters")
                         return false;
                     }
                     return true;
@@ -84,8 +84,8 @@ export class CollectNames extends React.Component {
             <NameInputRow
                 name={item}
                 onChange={(value) => this.props.update(index, () => capitalize(value), (value) => {
-                    if(value.length > 36){
-                        toast("Name cannot exceed 36 characters")
+                    if(value.length > 34){
+                        toast("Name cannot exceed 34 characters")
                         return false;
                     }
                     return true;
