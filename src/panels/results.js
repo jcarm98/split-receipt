@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { toast } from '../utils/toast.js';
 import { toDollars, toFloat } from '../utils/utils.js';
 
 /**
@@ -62,6 +63,9 @@ export class Results extends React.Component {
     taxOnChange(e) {
         let value = e.target.value;
         if (String(value).match("^[0-9]*[.]?[0-9]{0,2}$") === null) { }
+        else if (String(value).trim().length > 6){
+            toast("Tax cannot exceed 6 characters");
+        }
         else {
             this.setState({ tax: value });
         }
@@ -79,6 +83,9 @@ export class Results extends React.Component {
         }
         else {
             if (String(e.target.value).match("^[$]?[0-9]*[.]?[0-9]{0,2}$") === null) { }
+            else if (String(e.target.value).trim().length > 7){
+                toast("Tip cannot exceed 7 characters");
+            }
             else {
                 this.setState({ tip: e.target.value });
             }
