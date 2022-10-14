@@ -1,0 +1,40 @@
+server {
+	gzip		on;
+	gunzip		on;
+	gzip_types	*;
+	gzip_proxied	no-cache no-store private expired auth;
+	root /var/www/live;
+	index index.html;
+	server_name test.splitreceipt.app www.test.splitreceipt.app;
+	location / {
+		gzip_static on;
+		expires 7d;
+		try_files $uri $uri/ =404;
+	}
+	listen [::]:443 ssl;
+	listen 443 ssl;
+	ssl_certificate /etc/letsencrypt/live/test.splitreceipt.app/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/test.splitreceipt.app/privkey.pem;
+	include /etc/letsencrypt/options-ssl-nginx.conf;
+	ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+}
+
+server {
+	if ($host = test.splitreceipt.app){
+		return 301 https://$host$request_uri;
+	}
+	listen 80 default_server;
+	listen [::]:80 default_server;
+	server_name test.splitreceipt.app;
+	return 404;
+}
+
+server {
+	if ($host = www.test.splitreceipt.app){
+		return 301 https://$host$request_uri;
+	}
+	listen 80 ;
+	listen [::]:80 ;
+	server_name www.test.splitreceipt.app;
+	return 404;
+}
