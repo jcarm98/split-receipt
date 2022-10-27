@@ -1,4 +1,4 @@
-name: Test
+name: Deploy Live Split Receipt
 on:
  # push:
  #   branches: ["main"]
