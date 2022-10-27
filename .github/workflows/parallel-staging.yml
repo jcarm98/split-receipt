@@ -15,7 +15,7 @@ jobs:
     # - run: eval `ssh-agent -s` && ssh-add private_key 
     # - run: scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i private_key newfile.txt root@${{secrets.SERVER_IP}}:~/newfile.txt
       - run: echo $RANDOM | md5sum | head -c 20 > name.txt
-      - run: echo "sh ~/runner_helper2 $(cat name.txt)" | ssh -o StrictHostKeyChecking=no -i private_key deploy@${{secrets.SERVER_IP}}
+      - run: echo "sh ~/runner_helper_sr $(cat name.txt)" | ssh -o StrictHostKeyChecking=no -i private_key deploy@${{secrets.SERVER_IP}}
     #  - run: ssh -o StrictHostKeyChecking=no -i private_key deploy@${{secrets.SERVER_IP}} "rm -rf ~/repo && . ~/runner_helper"
       - run: echo "cd ~/$(cat name.txt) && export PATH=/home/deploy/.nvm/versions/node/v14.17.5/bin:$PATH && yarn install && yarn build" | ssh -o StrictHostKeyChecking=no -i private_key deploy@${{secrets.SERVER_IP}}
       - run: echo "rm -rf /var/www/splitreceipt-staging && cp -r ~/$(cat name.txt)/build /var/www/splitreceipt-staging" | ssh -o StrictHostKeyChecking=no -i private_key deploy@${{secrets.SERVER_IP}}
