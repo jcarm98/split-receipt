@@ -14,7 +14,7 @@ jobs:
       - run: chmod 400 private_key
     # - run: eval `ssh-agent -s` && ssh-add private_key 
     # - run: scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i private_key newfile.txt root@${{secrets.SERVER_IP}}:~/newfile.txt
-      - run: ssh -o StrictHostKeyChecking=no -i private_key deploy@${{secrets.SERVER_IP}} "rm -rf ~/repo && . ~/runner_helper"
+      - run: ssh -o StrictHostKeyChecking=no -i private_key deploy@${{secrets.SERVER_IP}} "rm -rf ~/repo && . ~/runner_helper_sr"
       - run: ssh -o StrictHostKeyChecking=no -i private_key deploy@${{secrets.SERVER_IP}} "cd ~/repo && export PATH=/home/deploy/.nvm/versions/node/v14.17.5/bin:$PATH && git checkout v1 && yarn install && yarn build"
       - run: ssh -o StrictHostKeyChecking=no -i private_key deploy@${{secrets.SERVER_IP}} "rm -rf /var/www/splitreceipt-v1 && cp -r ~/repo/build /var/www/splitreceipt-v1"
       - run: ssh -o StrictHostKeyChecking=no -i private_key deploy@${{secrets.SERVER_IP}} "rm -rf /etc/nginx/sites-enabled/sr-v1 && cp ~/repo/v1-config /etc/nginx/sites-enabled/sr-v1 && sudo /usr/sbin/service nginx restart"
