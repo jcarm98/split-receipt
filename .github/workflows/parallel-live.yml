@@ -19,6 +19,6 @@ jobs:
     #  - run: ssh -o StrictHostKeyChecking=no -i private_key deploy@${{secrets.SERVER_IP}} "rm -rf ~/repo && . ~/runner_helper"
       - run: echo "cd ~/$(cat name.txt) && export PATH=/home/deploy/.nvm/versions/node/v14.17.5/bin:$PATH && yarn install && yarn build" | ssh -o StrictHostKeyChecking=no -i private_key deploy@${{secrets.SERVER_IP}}
       - run: echo "rm -rf /var/www/splitreceipt && cp -r ~/$(cat name.txt)/build /var/www/splitreceipt" | ssh -o StrictHostKeyChecking=no -i private_key deploy@${{secrets.SERVER_IP}}
-      - run: echo "rm -rf /etc/nginx/sites-enabled/splitreceipt-live && cp ~/$(cat name.txt)/prod-config /etc/nginx/sites-enabled/splitreceipt-live && sudo /usr/sbin/service nginx restart; rm -rf ~/$(cat name.txt)" | ssh -o StrictHostKeyChecking=no -i private_key deploy@${{secrets.SERVER_IP}}
+      - run: echo "rm -rf /etc/nginx/sites-enabled/sr-live && cp ~/$(cat name.txt)/live-config /etc/nginx/sites-enabled/sr-live && sudo /usr/sbin/service nginx restart; rm -rf ~/$(cat name.txt)" | ssh -o StrictHostKeyChecking=no -i private_key deploy@${{secrets.SERVER_IP}}
       - run: eval `ssh-agent -s` && ssh-add -D
       - run: rm private_key
