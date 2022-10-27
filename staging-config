@@ -1,5 +1,5 @@
 server {
-	root /var/www/splitreceipt-staging;
+	root /var/www/sr-staging;
 	index index.html;
 	server_name staging.splitreceipt.app www.staging.splitreceipt.app;
 	location / {
