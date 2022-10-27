@@ -1,4 +1,4 @@
-name: Test
+name: Deploy Staging Split Receipt
 on:
  # push:
  #   branches: ["main"]
@@ -6,7 +6,7 @@ on:
  #    - "*"
   workflow_dispatch:
 jobs:
-  test-job:
+  p-staging-job:
     timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
