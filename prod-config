@@ -3,7 +3,7 @@ server {
 	gunzip		on;
 	gzip_types	*;
 	gzip_proxied	no-cache no-store private expired auth;
-	root /var/www/live;
+	root /var/www/splitreceipt;
 	index index.html;
 	server_name splitreceipt.app www.splitreceipt.app;
 	location / {
