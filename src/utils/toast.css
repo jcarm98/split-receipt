@@ -101,7 +101,7 @@
 .glass-panel {
     position: relative;
     opacity: 0;
-    animation: popout 0.5s cubic-bezier(0, 0.79, 0, 1) forwards, fade-out 5s linear 5s;
+    animation: popout 0.5s cubic-bezier(0, 0.79, 0, 1) forwards, fade-out 5s linear 5s forwards;
 }
 
 .glass-panel::before {
